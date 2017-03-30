@@ -1,0 +1,26 @@
+﻿@model List<SafetySesh.Web.Data.SafetyDiscussion>
+@{
+    ViewBag.Title = "Discussions";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Observer</th>
+        <th>Collegue</th>
+        <th>Date</th>
+        <th>Location</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Observer</td>
+            <td>@item.Collegue</td>
+            <td>@(item.Date?.ToShortDateString() ?? "")</td>
+            <td>@item.Location</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Add Discussion", "Add", "SafetyDiscussion")

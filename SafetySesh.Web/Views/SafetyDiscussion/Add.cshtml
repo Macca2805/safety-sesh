@@ -1,0 +1,27 @@
+﻿@model SafetySesh.Web.Data.SafetyDiscussion
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Add", "SafetyDiscussion", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Collegue)
+        @Html.EditorFor(m => m.Collegue)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Location)
+        @Html.EditorFor(m => m.Location)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Subject)
+        @Html.EditorFor(m => m.Subject)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Outcomes)
+        @Html.EditorFor(m => m.Outcomes)
+    </div>
+    <button type="submit">Submit</button>
+}
