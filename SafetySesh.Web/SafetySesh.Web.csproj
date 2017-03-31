@@ -266,6 +266,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\SafetyDiscussion\Index.cshtml" />
     <Content Include="Views\SafetyDiscussion\Add.cshtml" />
+    <Content Include="Views\SafetyDiscussion\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

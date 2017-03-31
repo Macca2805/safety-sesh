@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SafetySesh.Web.Data;
 using SafetySesh.Web.Models;
@@ -14,13 +15,11 @@ namespace SafetySesh.Web.Controllers
     {
         private ApplicationUserManager UserManager
             => HttpContext?.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        private ApplicationSignInManager SignInManager
-            => HttpContext?.GetOwinContext().Get<ApplicationSignInManager>();
 
         // GET: SafetyDiscussion
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            var userId = User.Identity.GetUserId();
             var model = new List<SafetyDiscussion>();
             using (var context = new SafetySeshContext())
             {
@@ -42,7 +41,7 @@ namespace SafetySesh.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(SafetyDiscussion model)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            var userId = User.Identity.GetUserId();
             var user = await UserManager.FindByIdAsync(userId);
 
             model.UserId = userId;
@@ -55,6 +54,15 @@ namespace SafetySesh.Web.Controllers
                 context.SaveChanges();
             }
             return RedirectToAction("Index");
+        }
+
+        public async Task<ActionResult> View(Guid id)
+        {
+            using (var context = new SafetySeshContext())
+            {
+                var model = await context.SafetyDiscussions.FindAsync(id);
+                return View(model);
+            }
         }
     }
 }

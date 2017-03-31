@@ -11,6 +11,7 @@
         <th>Collegue</th>
         <th>Date</th>
         <th>Location</th>
+        <th>Actions</th>
     </tr>
     @foreach (var item in Model)
     {
@@ -19,8 +20,11 @@
             <td>@item.Collegue</td>
             <td>@(item.Date?.ToShortDateString() ?? "")</td>
             <td>@item.Location</td>
+            <td>
+                <a href="~/SafetyDiscussion/View/@item.Id" class="btn btn-sm btn-default">View</a>
+            </td>
         </tr>
     }
 </table>
 
-@Html.ActionLink("Add Discussion", "Add", "SafetyDiscussion")
+@Html.ActionLink("Add Discussion", "Add", "SafetyDiscussion", new { @class = "btn btn-primary" })
